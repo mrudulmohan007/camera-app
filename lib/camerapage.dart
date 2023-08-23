@@ -1,7 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
-class CameraHomePage extends StatelessWidget {
+class CameraHomePage extends StatefulWidget {
   const CameraHomePage({super.key});
+
+  @override
+  State<CameraHomePage> createState() => _CameraHomePageState();
+}
+
+class _CameraHomePageState extends State<CameraHomePage> {
+  File? _image;
+  final picker = ImagePicker();
+  Future getImage() async {
+    final pickerImage = await picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickerImage != null) {
+        _image = File(pickerImage.path);
+      } else {
+        print('no image selected');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,46 +37,15 @@ class CameraHomePage extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        body: Column(
-          children: [
-            Container(
-              height: 400,
-              child: const Center(
-                child: Text(
-                  'CLICK PHOTOS,MAKE MEMORIES !',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white),
-                ),
-              ),
-            ),
-            Container(
-                height: 300,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Capture here !',
-                      style: TextStyle(
-                        fontSize: 19,
-                        color: Colors.black45,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.camera_alt,
-                        size: 40,
-                      ),
-                    ),
-                  ],
-                )),
-          ],
+        body: Center(
+          child:
+              _image == null ? Text('No image selected') : Image.file(_image!),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            getImage();
+          },
+          child: Icon(Icons.camera_alt),
         ),
       ),
     );

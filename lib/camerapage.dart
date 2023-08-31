@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'displaying_screen.dart';
 
 class CameraHomePage extends StatefulWidget {
   const CameraHomePage({super.key});
@@ -24,6 +25,13 @@ class _CameraHomePageState extends State<CameraHomePage> {
     });
   }
 
+  void gotodisplayScreen() {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: ((context) => ImageDisplayScreen(
+              image: _image,
+            ))));
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -37,13 +45,15 @@ class _CameraHomePageState extends State<CameraHomePage> {
           ),
           centerTitle: true,
         ),
-        body: Center(
-          child:
-              _image == null ? Text('No image selected') : Image.file(_image!),
+        body: Container(
+          child: Center(
+            child: Text('Click photos,make memories !'),
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             getImage();
+            gotodisplayScreen();
           },
           child: Icon(Icons.camera_alt),
         ),

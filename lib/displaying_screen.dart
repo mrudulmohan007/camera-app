@@ -9,13 +9,17 @@ class ImageDisplayScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('View pics'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: getImageWidget(),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Color.fromARGB(255, 169, 219, 195),
+        appBar: AppBar(
+          backgroundColor: const Color(0xFF70BC98),
+          title: Text('VIEW PICTURES'),
+          centerTitle: true,
+        ),
+        body: Center(
+          child: getImageWidget(),
+        ),
       ),
     );
   }
@@ -24,7 +28,21 @@ class ImageDisplayScreen extends StatelessWidget {
     if (image == null) {
       return Text('No image selected');
     } else {
-      return Image.file(image!);
+      return Container(
+        margin: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.black,
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(
+              12,
+            ),
+          ),
+        ),
+        child: Image.file(image!),
+      );
     }
   }
 }

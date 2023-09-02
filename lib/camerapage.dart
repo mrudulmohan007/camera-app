@@ -19,6 +19,7 @@ class _CameraHomePageState extends State<CameraHomePage> {
     setState(() {
       if (pickerImage != null) {
         _image = File(pickerImage.path);
+        gotodisplayScreen();
       } else {
         print('no image selected');
       }
@@ -36,26 +37,29 @@ class _CameraHomePageState extends State<CameraHomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFF70BC98),
+        backgroundColor: const Color(0xFF70BC98),
         appBar: AppBar(
-          backgroundColor: Color(0xFF70BC98),
+          backgroundColor: const Color(0xFF70BC98),
           title: const Text(
             'CAMERA APP',
             style: TextStyle(fontWeight: FontWeight.w800, fontSize: 20),
           ),
           centerTitle: true,
         ),
-        body: Container(
-          child: Center(
-            child: Text('Click photos,make memories !'),
+        body: const Center(
+          child: Text(
+            'Click photos,make memories !',
+            style: TextStyle(
+              fontSize: 23,
+              fontWeight: FontWeight.w700,
+            ),
           ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             getImage();
-            gotodisplayScreen();
           },
-          child: Icon(Icons.camera_alt),
+          child: const Icon(Icons.camera_alt),
         ),
       ),
     );

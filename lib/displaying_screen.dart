@@ -14,7 +14,12 @@ class ImageDisplayScreen extends StatelessWidget {
         backgroundColor: Color.fromARGB(255, 169, 219, 195),
         appBar: AppBar(
           backgroundColor: const Color(0xFF70BC98),
-          title: Text('VIEW PICTURES'),
+          title: const Text(
+            'VIEW PICTURES',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           centerTitle: true,
         ),
         body: Center(
